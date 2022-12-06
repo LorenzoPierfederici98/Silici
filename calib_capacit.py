@@ -2,6 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
+#Fit sull'andamento fra capacità e larghezza
+#dei picchi dovuta al rumore; calibrazione della capacità
+#per il cavetto a 0.5 ns che collega il rivelatore al 
+#pre amplificatore
+
 C = np.array([4.4, 6.9, 11.4, 21.7])
 #sigma = np.array([5.83, 5.87, 6.00, 6.82])
 FWHM = np.array([13.46, 13.41, 13.96, 16.09])
