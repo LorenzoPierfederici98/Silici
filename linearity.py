@@ -36,7 +36,7 @@ print(f'b = {b1:.3f} +- {db1:.3f} mV')
 print(f'chisq/ndof = {chisq:.3f}/{ndof}')
 
 correlation = covm1[0][1]/(da1*db1)
-peak = 218
+peak = 18
 volt_calibration = a1*peak + b1  #voltaggio ottenuto dalla calibrazione
 dvolt_calibration = np.sqrt(
     covm1[0][0]*peak**2 + covm1[1][1] + 2*peak*correlation*da1*db1)
