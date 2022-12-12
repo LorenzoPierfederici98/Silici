@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-C = np.array([4.4, 6.9, 11.4, 21.7])
+C = np.array([4.4, 6.9, 11.4, 21.7]) #capacità in pF
 #sigma = np.array([5.83, 5.87, 6.00, 6.82])
 FWHM = np.array([13.46, 13.41, 13.96, 16.09])
 sigma = FWHM/2.35
@@ -10,11 +10,9 @@ sigma = FWHM/2.35
 dsigma = np.zeros(len(sigma))
 dC = np.array([0.1 for i in range(len(C))])
 
-# sigma in funzione di C; la sigma è la somma in quadratura
+# C in funzione di sigma; la sigma è la somma in quadratura
 # di una componente di rumore elettronico che scala linearmente con la
 # capacità e di un termine costante (statistico, drift, etc.)
-
-
 def fit_func(x, a, d):
     return 1/a*np.sqrt(x**2 - d)
 

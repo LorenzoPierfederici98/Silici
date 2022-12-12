@@ -13,7 +13,7 @@ ampiezza ed offset.
 """
 
 PATH = 'C:/Users/Lorenzo/Desktop/Lab/Silici/24.11'  # percorso dei file .txt
-NOME_SPETTRO = '60k_cavetto_0_5.txt'  # modificare con il nome del file
+NOME_SPETTRO = '60k_1_2.txt'  # modificare con il nome del file
 PATH = os.path.join(PATH, NOME_SPETTRO)
 
 #mette i risultati del fit nel file NOME_SPETTROlog.txt
@@ -26,14 +26,17 @@ channels = np.array([i for i in range(0, 2048)],
                     dtype=float)  # numero di canali
 
 #capacità 4.4, 6.9, 0.5ns, 11.4, 18.6, 27.1
-peaks = np.array([298.01, 292.19, 293.56, 290.45, 291.33, 293.34])
-FWHM = np.array([13.46, 13.41, 13.63, 13.96, 17.14, 16.09])
+#peaks = np.array([298.01, 292.19, 293.56, 290.45, 291.33, 293.34])
+#FWHM = np.array([13.46, 13.41, 13.63, 13.96, 17.14, 16.09])
+#s = FWHM/2.35
+peak = 298
+FWHM = 13.56
 s = FWHM/2.35
-init_values = [peaks[2], s[2], 3000., 50.]
+init_values = [peak, s, 3000., 50.]
 
 #canali vicino al picco, da n a n_max-1
-channels1 = np.array([channels[i] for i in range(275, 311)])
-counts1 = np.array([counts[i] for i in range(275, 311)])
+channels1 = np.array([channels[i] for i in range(280, 315)])
+counts1 = np.array([counts[i] for i in range(280, 315)])
 
 def gaussiana(x, mu, sigma, A, B):
     """Funzione per fit gaussiano channels-counts. A è l'ampiezza della gaussiana
