@@ -1,0 +1,25 @@
+- Verifica linearità mV segnali test-canali X
+
+- Verifica risoluzione energetica del segnale test a 60keV al variare dell'amplificazione X
+
+- Verifica del drift per 1K di amplificazione X
+
+- Grafico sigma_tot vs capacità con segnale test da 60keV e stima della capacità del cavetto 0.5 ns X (?)
+
+
+- Si collega il rivelatore al pre-ampl tramite il cavetto a 0.5 ns. Confronto del segnale test (60keV) senza il rivelatore
+e del segnale test con il rivelatore con bias di 12V X
+
+- Si aggiunge la sorgente di Am241 e si confrontano i segnali a vari bias
+
+- Identificazione picchi Am241
+
+- Si aggiungono filtri di 120um di Gd e Mo, calibrazione energie X
+
+- Identificazione picchi Gd, Mo (?)
+
+- Verifica dell'attenuazione per Gd, Mo con i conteggi netti (fare riprova con i fit e togliendo il fondo)
+
+- Verifica dell'attenuazione per spessori di Gd, Zr40, Mo42, Sn50, Pb82
+
+- Verifica dell'attenuazione per spessori di Cu
