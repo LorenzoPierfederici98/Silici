@@ -13,12 +13,8 @@ ampiezza ed offset.
 """
 
 PATH = 'C:/Users/Lorenzo/Desktop/Lab/Silici/24.11'  # percorso dei file .txt
-NOME_SPETTRO = '60k_Mo180s.txt'  # modificare con il nome del file
+NOME_SPETTRO = 'Sign_12V.txt'  # modificare con il nome del file
 PATH = os.path.join(PATH, NOME_SPETTRO)
-
-#mette i risultati del fit nel file NOME_SPETTROlog.txt
-#logging.basicConfig(filename=NOME_SPETTRO.replace('txt', '_bckg_log.txt'),
-#level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
 
 # salta i commenti ed acquisice i conteggi dei canali 0-2047
 counts = np.loadtxt(PATH, skiprows=12, max_rows=2048, unpack=True)
@@ -34,12 +30,12 @@ channels = np.array([i for i in range(0, 2048)],
 #s = FWHM/2.35
 
 peak = 308.
-s = 6.
-init_values = [peak, s, 3000., 200.]
+s = 7.
+init_values = [peak, s, 50000., 50.]
 
 #canali vicino al picco, da n a n_max-1
-channels1 = np.array([channels[i] for i in range(280, 330)])
-counts1 = np.array([counts[i] for i in range(280, 330)])
+channels1 = np.array([channels[i] for i in range(280, 331)])
+counts1 = np.array([counts[i] for i in range(280, 331)])
 
 def gaussiana(x, mu, sigma, A, B):
     """Funzione per fit gaussiano channels-counts. A è l'ampiezza della gaussiana
@@ -119,6 +115,10 @@ def risultati(F):
 
 if __name__ == '__main__':
 
+    #mette i risultati del fit nel file NOME_SPETTROlog.txt
+    logging.basicConfig(filename=NOME_SPETTRO.replace('txt', '_log.txt'),
+    level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
+
     F = FitGauss(channels1, counts1, init_values)
     risultati = risultati(F)
     mu0 = risultati[0]
@@ -126,10 +126,11 @@ if __name__ == '__main__':
     A0 = risultati[2]
     B0 = risultati[3]
     dm, dsigma, dA, dB = np.sqrt(F.covm.diagonal())
-    print('C = 8.7 pf\n')
+    #print('C = 8.7 pf\n')
+    print(f'Range canali: {channels1[0]}-{channels1[-1]}\n')
     print(f'Canale picco = {mu0:.3f} +- {dm:.3f}\n')
     print(f'sigma = {sigma0:.3f} +- {dsigma:.3f}\n')
     print(f'A = {A0:.3f} +- {dA:.3f}\n')
     print(f'B = {B0:.3f} +- {dB:.3f}\n')
-    #log_results(channels1, mu0, dm, sigma0, dsigma, A0, dA, B0, dB)
+    log_results(channels1, mu0, dm, sigma0, dsigma, A0, dA, B0, dB)
     plot_results(channels1, counts1, mu0, sigma0, A0, B0, NOME_SPETTRO)

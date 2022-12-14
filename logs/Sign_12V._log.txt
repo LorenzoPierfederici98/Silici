@@ -1,0 +1,28 @@
+#Segnale con sorgente e rivelatore, da confrontare con 60k.log (segnale test senza rivelatore) 
+#e Sign_test_rivelatore.log (Segnale test con rivelatore)
+
+2022-12-13 19:34:06,868:INFO:Range di canali: 280.0-330.0
+
+2022-12-13 19:34:06,868:INFO:media = 307.864 +- 0.054
+
+2022-12-13 19:34:06,868:INFO:dev. std = 6.773 +- 0.072
+
+2022-12-13 19:34:06,868:INFO:A = 55340.875 +- 702.588
+
+2022-12-13 19:34:06,868:INFO:B = 212.738 +- 16.393
+
+Area totale = 64481.000 +- 253.931
+
+Dati sottraendo solo il continuum:
+
+Area continuum = 10857.000 +- 213.540
+
+Area netta = 53624.000 +- 331.784
+
+media netta = 307.701 +- 0.042
+
+sigma netta = 6.561 +- 0.065
+
+
+
+Risoluzione = 5.2 +- 0.1 %
