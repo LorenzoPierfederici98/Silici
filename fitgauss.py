@@ -13,7 +13,7 @@ ampiezza ed offset.
 """
 
 PATH = 'C:/Users/Lorenzo/Desktop/Lab/Silici/24.11'  # percorso dei file .txt
-NOME_SPETTRO = 'Sign_12V.txt'  # modificare con il nome del file
+NOME_SPETTRO = '60k_Gd180s.txt'  # modificare con il nome del file
 PATH = os.path.join(PATH, NOME_SPETTRO)
 
 # salta i commenti ed acquisice i conteggi dei canali 0-2047
@@ -30,12 +30,12 @@ channels = np.array([i for i in range(0, 2048)],
 #s = FWHM/2.35
 
 peak = 308.
-s = 7.
-init_values = [peak, s, 50000., 50.]
+s = 6.5
+init_values = [peak, s, 50000., 600.]
 
 #canali vicino al picco, da n a n_max-1
-channels1 = np.array([channels[i] for i in range(280, 331)])
-counts1 = np.array([counts[i] for i in range(280, 331)])
+channels1 = np.array([channels[i] for i in range(283, 333)])
+counts1 = np.array([counts[i] for i in range(283, 333)])
 
 def gaussiana(x, mu, sigma, A, B):
     """Funzione per fit gaussiano channels-counts. A è l'ampiezza della gaussiana
@@ -118,7 +118,8 @@ if __name__ == '__main__':
     #mette i risultati del fit nel file NOME_SPETTROlog.txt
     logging.basicConfig(filename=NOME_SPETTRO.replace('txt', '_log.txt'),
     level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
-
+    #logging.basicConfig(filename=NOME_SPETTRO.replace('.Spe', '_log.txt'),
+    #level=logging.INFO, format='%(asctime)s:%(levelname)s:%(message)s')
     F = FitGauss(channels1, counts1, init_values)
     risultati = risultati(F)
     mu0 = risultati[0]

@@ -26,22 +26,9 @@ counts1 = fit.counts1
 
 NOME_SPETTRO = NOME_SPETTRO.replace('.txt', '')
 
-# live time di acquisizione del background e dei radionuclidi
-#LIVE_TIME_BCKG = 54437
 LIVE_TIME = 56
 
-# live time del cesio con _sx, x spessori
-LIVE_TIME_CS = {'Cs137_s0': 1207, 'Cs137_s2': 544,
-                'Cs137_s3': 594, 'Cs137_s4': 713, 'Cs137_s5': 808}
-# il background è riscalato con il rapporto fra il live time della
-# misura dello spettro ed il live time della misura del fondo senza
-# sorgente
-
-#background = background * LIVE_TIME[NOME_SPETTRO]/LIVE_TIME_BCKG
-#background = background * LIVE_TIME_Cs3/LIVE_TIME_BCKG
-#background = background * LIVE_TIME_CS[NOME_SPETTRO]/LIVE_TIME_BCKG
 init_values = fit.init_values
-
 
 F = fit.FitGauss(channels1, counts1, init_values)
 risultati = fit.risultati(F)
@@ -52,9 +39,11 @@ B0 = risultati[3]
 dm, dsigma, dA, dB = np.sqrt(F.covm.diagonal())
 
 
+sigma_step = 1 #di quante sigma mi sposto dal picco
+
 # canali a 3 sigma dal picco, trovato con il fit
-A = int(np.floor(mu0 - 3*sigma0))
-B = int(np.floor(mu0 + 3*sigma0))
+A = int(np.floor(mu0 - sigma_step*sigma0))
+B = int(np.floor(mu0 + sigma_step*sigma0))
 
 # numero di canali da mediare prima di A e dopo B
 m = 5
@@ -152,7 +141,7 @@ plt.ylabel('Counts [UA]')
 plt.plot(channels, counts, marker='o', color='b', label='Dati')
 #plt.plot(channels, background, marker='o', label='Fondo true')
 plt.plot(x, retta, marker='o',
-         label='Retta fra la media dei punti a $\pm$ $3\sigma$ dal picco')
+         label= f'Retta fra la media dei punti a $\pm$ {sigma_step}$\sigma$ dal picco')
 plt.plot(channels_restrict, spettro_netto, marker='o',
         label='Spettro al netto del continuum')
 plt.minorticks_on()

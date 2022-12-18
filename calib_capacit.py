@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
 C = np.array([4.4, 6.9, 11.4, 21.7]) #capacità in pF
+C = [c + 1 for c in C] #tutte le capacità sono in parallelo alla C test di 1 pF
 #sigma = np.array([5.83, 5.87, 6.00, 6.82])
 FWHM = np.array([13.46, 13.41, 13.96, 16.09])
 sigma = FWHM/2.35
